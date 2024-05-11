@@ -10,20 +10,19 @@ precoCompraInput.addEventListener("input", (event) => {
 
 const freteInput = document.getElementById("frete");
 if (!frete || frete === 0) {
-    setFreteValue(frete);
+  setFreteValue(frete);
 }
 
 const precoVendaInput = document.getElementById("precoVenda");
 precoVendaInput.addEventListener("input", (event) => {
   precoVendaValue = parseFloat(event.target.value) || 0;
-  console.log('precoVendaValue', precoVendaValue)
-  if (precoCompraValue
-     && (precoVendaValue && precoVendaValue <= 79)) {
+  console.log("precoVendaValue", precoVendaValue);
+  if (precoCompraValue && precoVendaValue && precoVendaValue <= 79) {
     frete = 24;
-} else {
+  } else {
     frete = 0;
-}
-setFreteValue(frete);
+  }
+  setFreteValue(frete);
 });
 
 const taxaMLInput = document.getElementById("taxaML");
@@ -43,7 +42,7 @@ function calcularTotal() {
   const taxaML = precoCompraValue * 0.13 + 6;
 
   console.log("frete", frete);
-  const totalParcial = precoCompraValue + frete + taxaML + embalagem + imposto;
+  const totalParcial = precoCompraValue + frete + taxaML + embalagem;
   const total = totalParcial + totalParcial * 0.04;
 
   lucro = precoVendaValue - total || 0;
@@ -71,6 +70,7 @@ function calculateCosts(e) {
 }
 
 function resetCalculations() {
+  if (!precoCompraInput.value && !precoVendaInput.value) return;
   // Limpar os campos de entrada
   document.getElementById("precoCompra").value = "";
   document.getElementById("frete").value = "";
@@ -91,5 +91,5 @@ function resetCalculations() {
 }
 
 function setFreteValue(value) {
-    freteInput.value = `R$ ${value.toFixed(2)}`;
+  freteInput.value = `R$ ${value.toFixed(2)}`;
 }
