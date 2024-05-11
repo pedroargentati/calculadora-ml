@@ -14,10 +14,12 @@ const impostoInput = document.getElementById("imposto");
 const resultsTable = document.getElementById("results-table");
 
 // Valores padrão
-const defaultTaxaML = `13% + R$ 6,00`;
+const defaultTaxaML = "13% + R$ 6,00";
+const defaultEmbalagem = "R$ 1,00";
+
 taxaMLInput.value = defaultTaxaML;
-embalagemInput.value = `R$ 1,00`;
-impostoInput.value = `4%`;
+embalagemInput.value = defaultEmbalagem;
+impostoInput.value = "4%";
 
 // Configuração dos event listeners
 precoCompraInput.addEventListener("input", (event) => {
@@ -84,7 +86,7 @@ function resetCalculations() {
 
   // Reverter para os valores fixos padrão
   taxaMLInput.value = defaultTaxaML;
-  embalagemInput.value = `R$ 1,00`;
+  embalagemInput.value = defaultEmbalagem;
 
   // Limpar a tabela e o total
   resultsTable.innerHTML = "";
