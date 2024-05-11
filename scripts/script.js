@@ -12,7 +12,6 @@ const taxaMLInput = document.getElementById("taxaML");
 const embalagemInput = document.getElementById("embalagem");
 const impostoInput = document.getElementById("imposto");
 const resultsTable = document.getElementById("results-table");
-const totalDisplay = document.getElementById("total");
 
 // Valores padrão
 const defaultTaxaML = `13% + R$ 6,00`;
@@ -28,12 +27,12 @@ precoCompraInput.addEventListener("input", (event) => {
 precoVendaInput.addEventListener("input", (event) => {
   precoVendaValue = parseFloat(event.target.value) || 0;
   atualizarFrete();
-  calcularTotal();
+  calcularTotal(event);
 });
 
 freteInput.addEventListener("input", (event) => {
   frete = parseFloat(event.target.value.replace("R$ ", "")) || 0;
-  calcularTotal();
+  calcularTotal(event);
 });
 
 function atualizarFrete() {
@@ -45,7 +44,8 @@ function atualizarFrete() {
   setFreteValue(frete);
 }
 
-function calcularTotal() {
+function calcularTotal(event) {
+  event ?? event.preventDefault();
   // Obter valores dos inputs
   const embalagem = parseFloat(embalagemInput.value.replace("R$ ", "")) || 0;
   const imposto = parseFloat(impostoInput.value) || 0;
@@ -53,11 +53,8 @@ function calcularTotal() {
 
   // Cálculo do custo total e lucro
   const totalParcial = precoCompraValue + frete + taxaML + embalagem;
-  const total = totalParcial + (totalParcial * (imposto / 100));
+  const total = totalParcial + totalParcial * (imposto / 100);
   lucro = precoVendaValue - total || 0;
-
-  // Atualizar visualmente o total
-  totalDisplay.textContent = `Total: R$ ${total.toFixed(2)}`;
 
   // Escolher a classe de estilo correta para o lucro
   const lucroClass = lucro >= 0 ? "positive" : "negative";
@@ -90,7 +87,6 @@ function resetCalculations() {
 
   // Limpar a tabela e o total
   resultsTable.innerHTML = "";
-  totalDisplay.textContent = "";
 }
 
 function setFreteValue(value) {

@@ -17,7 +17,7 @@
       </div>
 
       <div class="content">
-        <form action="post" onsubmit="return calculateCosts(event)" class="form-left">
+        <form onsubmit="calcularTotal(event); return false;" class="form-left">
           <label for="valor">Preço de compra</label>
           <input type="text" name="precoCompra" id="precoCompra" />
           <br />
@@ -52,7 +52,6 @@
             </tbody>
           </table>
           <button type="button" onclick="resetCalculations()">Limpar</button>
-          <h1 class="total" id="total"></h1>
         </div>
       </div>
     </main>
