@@ -36,7 +36,7 @@ freteInput.addEventListener("input", (event) => {
 });
 
 function atualizarFrete() {
-  if (precoVendaValue && precoVendaValue <= 79) {
+  if (precoVendaValue && precoVendaValue >= 79) {
     frete = 24;
   } else {
     frete = 0;
@@ -54,7 +54,7 @@ function calcularTotal(event) {
 
   // Cálculo do custo total e lucro
   const totalParcial = precoCompraValue + frete + taxaML + embalagem;
-  const total = totalParcial + totalParcial * (imposto / 100);
+  const total = totalParcial + (totalParcial * (imposto / 100));
   lucro = precoVendaValue - total || 0;
 
   // Escolher a classe de estilo correta para o lucro
