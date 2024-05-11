@@ -37,12 +37,10 @@ freteInput.addEventListener("input", (event) => {
   calcularTotal(event);
 });
 
+if (!freteInput.value) setFreteValue(0);
+
 function atualizarFrete() {
-  if (precoVendaValue && precoVendaValue >= 79) {
-    frete = 24;
-  } else {
-    frete = 0;
-  }
+  frete = precoVendaValue && precoVendaValue >= 79 ? 24 : 0;
   setFreteValue(frete);
 }
 
