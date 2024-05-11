@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Calculadora Custos ML</title>
+  </head>
+  <body>
+    <main>
+      <div class="header">
+        <img
+          src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/5.22.1/mercadolibre/logo__large_plus@2x.png"
+          alt="Logo Mercado Livre"
+        />
+        <h2>Calculadora de Custos ML</h2>
+      </div>
+
+      <div class="content">
+        <form action="post" onsubmit="return calculateCosts(event)" class="form-left">
+          <label for="valor">Preço de compra</label>
+          <input type="text" name="precoCompra" id="precoCompra" />
+          <br />
+          <label for="valor">Valor desejado de venda</label>
+          <input type="text" name="precoVenda" id="precoVenda" />
+          <br />
+          <label for="frete">Frete</label>
+          <input type="text" name="frete" id="frete" class="readonly" readonly/>
+          <br />
+          <label for="imposto">Imposto</label>
+          <input type="text" name="imposto" id="imposto" class="readonly" readonly/>
+          <br />
+          <label for="taxaML">Taxa Fixa ML</label>
+          <input type="text" name="taxaML" id="taxaML" class="readonly" readonly/>
+          <br />
+          <label for="embalagem">Embalagem</label>
+          <input type="text" name="embalagem" id="embalagem" class="readonly" readonly/>
+          <br />
+          <button type="submit">Calcular</button>
+        </form>
+
+        <div class="table-right">
+          <table>
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody id="results-table">
+              <!-- Resultados vão aqui -->
+            </tbody>
+          </table>
+          <button type="button" onclick="resetCalculations()">Limpar</button>
+          <h1 class="total" id="total"></h1>
+        </div>
+      </div>
+    </main>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>
