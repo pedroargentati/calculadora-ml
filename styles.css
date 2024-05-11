@@ -125,6 +125,15 @@ button[type="button"]:hover {
   background-color: #e64a19;
 }
 
+.negative {
+  color: #f00;
+  font-weight: bold;
+}
+
+.positive {
+  color: #0c0;
+  font-weight: bold;
+}
 
 .readonly {
   background-color: #f0f0f0;
