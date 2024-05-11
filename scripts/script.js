@@ -46,6 +46,7 @@ function atualizarFrete() {
 
 function calcularTotal(event) {
   event ?? event.preventDefault();
+  if (!precoCompraValue || !precoVendaValue) return;
   // Obter valores dos inputs
   const embalagem = parseFloat(embalagemInput.value.replace("R$ ", "")) || 0;
   const imposto = parseFloat(impostoInput.value) || 0;
