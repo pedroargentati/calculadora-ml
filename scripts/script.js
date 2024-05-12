@@ -40,7 +40,7 @@ freteInput.addEventListener("input", (event) => {
 if (!freteInput.value) setFreteValue(0);
 
 function atualizarFrete() {
-  frete = precoVendaValue && precoVendaValue >= 79 ? 24 : 0;
+  frete = precoVendaValue && precoVendaValue > 79 ? 24 : 0;
   setFreteValue(frete);
 }
 
@@ -49,13 +49,13 @@ function calcularTotal(event) {
   if (!precoCompraValue || !precoVendaValue) return;
   // Obter valores dos inputs
   const embalagem = parseFloat(embalagemInput.value.replace("R$ ", "")) || 0;
-  const imposto = parseFloat(impostoInput.value) || 0;
-  const taxaML = precoCompraValue * 0.13 + 6;
+  const imposto = calculateImposto(parseFloat(precoVendaValue) || 0);
+  const taxaML = calculateTaxaML(precoVendaValue);
 
   // Cálculo do custo total e lucro
-  const totalParcial = precoCompraValue + frete + taxaML + embalagem;
-  const total = totalParcial + (totalParcial * (imposto / 100));
-  lucro = precoVendaValue - total || 0;
+  const custoParcial = precoCompraValue + frete + taxaML + embalagem;
+  const custoTotal = custoParcial + (custoParcial * (imposto / 100));
+  lucro = precoVendaValue - custoTotal || 0;
 
   // Escolher a classe de estilo correta para o lucro
   const lucroClass = lucro >= 0 ? "positive" : "negative";
@@ -64,10 +64,10 @@ function calcularTotal(event) {
   resultsTable.innerHTML = `
     <tr><td>Valor do Produto</td><td>R$ ${precoCompraValue.toFixed(2)}</td></tr>
     <tr><td>Frete</td><td>R$ ${frete.toFixed(2)}</td></tr>
-    <tr><td>Imposto</td><td>${imposto.toFixed(2)}%</td></tr>
+    <tr><td>Imposto</td><td>R$ ${imposto.toFixed(2)}</td></tr>
     <tr><td>Taxa Fixa ML</td><td>R$ ${taxaML.toFixed(2)}</td></tr>
     <tr><td>Embalagem</td><td>R$ ${embalagem.toFixed(2)}</td></tr>
-    <tr><td>Custo Total</td><td>R$ ${total.toFixed(2)}</td></tr>
+    <tr><td>Custo Total</td><td>R$ ${custoTotal.toFixed(2)}</td></tr>
     <tr><td>Lucro</td><td class="${lucroClass}">R$ ${lucro.toFixed(2)}</td></tr>
   `;
 }
@@ -92,4 +92,12 @@ function resetCalculations() {
 
 function setFreteValue(value) {
   freteInput.value = `R$ ${value.toFixed(2)}`;
+}
+
+function calculateImposto(valorVenda) {
+  return valorVenda * 0.04;
+}
+
+function calculateTaxaML(valorCompra) {
+  return (valorCompra * (11.5 / 100)) + 6;
 }
